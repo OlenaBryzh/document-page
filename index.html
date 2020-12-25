@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Technical Documentation Page</title>
+  <link rel="stylesheet" type="text/css" href="document-page.css">
+</head>
+<body>
+<nav id="navbar">
+  <header id="nav-header">CSS Documentation</header>
+  <ul>
+    <li>
+      <a class="nav-link" href="#Introduction">Introduction</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#CSS_syntax">CSS syntax</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#How_does_CSS_work">How does CSS work</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#Cascade_and_inheritance">Cascade and inheritance</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#CSS_selectors">CSS selectors</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#Value_and_units">Value and units</a>
+    </li>
+    <li>
+     <a class="nav-link" href="#Introduction_to_CSS_layout">Introduction to CSS layout</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#Responsive_design">Responsive design</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#Media_Queries">Media Queries</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#Modern_layout_technologies">Modern layout technologies</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#Reference">Reference</a>
+    </li>
+  </ul>
+</nav>
+<main id="main-doc">
+  <section class="main-section" id="Introduction">
+    <header class="header">Introduction</header>
+    <hr>
+    <article>
+      <p>Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in HTML or XML (including XML dialects such as SVG, MathML or XHTML). CSS describes how elements should be rendered on screen, on paper, in speech, or on other media.</p>
+      <p>CSS is among the core languages of the open web and is standardized across Web browsers according to W3C specifications.</p>
+      <p>From CSS3, the scope of the specification increased significantly and the progress on different CSS modules started to differ so much, that it became more effective to develop and release recommendations separately per module. Instead of versioning the CSS specification, W3C now periodically takes a snapshot of the latest stable state of the CSS specification.</p>
+    </article>
+  </section>
+  <section class="main-section" id="CSS_syntax">
+    <header class="header">CSS syntax</header>
+    <hr>
+    <article>
+      <p>CSS is a rule-based language — you define rules specifying groups of styles that should be applied to particular elements or groups of elements on your web page. For example "I want the main heading on my page to be shown as large red text."</p>
+      <p>The following code shows a very simple CSS rule that would achieve the styling described above:</p>
+      <div class="code">
+        <code>
+          h1 { <br>
+            color: red; <br>
+            font-size: 5em; <br>
+          }
+        </code>
+      </div>
+      <p>The rule opens with a selector . This selects the HTML element that we are going to style. In this case we are styling level one headings (&lt;h1&gt;).</p>
+      <p>We then have a set of curly braces { }. Inside those will be one or more declarations, which take the form of property and value pairs. Each pair specifies a property of the element(s) we are selecting, then a value that we'd like to give the property.</p>
+    </article>
+  </section>
+  <section class="main-section" id="How_does_CSS_work">
+    <header class="header">How does CSS work</header>
+    <hr>
+    <article>
+      <p>When a browser displays a document, it must combine the document's content with its style information. It processes the document in a number of stages, which we've listed below. Bear in mind that this is a very simplified version of what happens when a browser loads a webpage, and that different browsers will handle the process in different ways. But this is roughly what happens.</p>
+      <ol>
+        <li>The browser loads the HTML (e.g. receives it from the network).</li>
+        <li>It converts the HTML into a DOM (Document Object Model). The DOM represents the document in the computer's memory. The DOM is explained in a bit more detail in the next section.</li>
+        <li>The browser then fetches most of the resources that are linked to by the HTML document, such as embedded images and videos ... and linked CSS! JavaScript is handled a bit later on in the process, and we won't talk about it here to keep things simpler.</li>
+        <li>The browser parses the fetched CSS, and sorts the different rules by their selector types into different "buckets", e.g. element, class, ID, and so on. Based on the selectors it finds, it works out which rules should be applied to which nodes in the DOM, and attaches style to them as required.</li>
+        <li>The render tree is laid out in the structure it should appear in after the rules have been applied to it.</li>
+        <li>The visual display of the page is shown on the screen (this stage is called painting).</li>
+      </ol>
+    </article>
+  </section>
+  <section class="main-section" id="Cascade_and_inheritance">
+    <header class="header">Cascade and inheritance</header>
+    <hr>
+    <article>
+      <h4>The cascade</h4>
+      <p>Stylesheets cascade — at a very simple level, this means that the order of CSS rules matter; when two rules apply that have equal specificity the one that comes last in the CSS is the one that will be used.</p>
+      <p>In the below example, we have two rules that could apply to the h1. The h1 ends up being colored blue — these rules have an identical selector and therefore carry the same specificity, so the last one in the source order wins.</p>
+      <h1 class="exemp">This is my heading.</h1>
+      <div class="code">
+        <code>
+          h1 { <br>
+            color: red; <br>
+          } <br>
+          h1 { <br>
+            color: blue; <br>
+          }
+        </code>
+      </div>
+      <br>
+      <div class="code">              
+        <code>
+          &lt;h1&gt;This is my heading.&lt;/h1&gt;
+        </code>
+      </div>
+      <h4>Inheritance</h4>
+      <p>Inheritance also needs to be understood in this context — some CSS property values set on parent elements are inherited by their child elements, and some aren't.</p>
+      <p>For example, if you set a color and font-family on an element, every element inside it will also be styled with that color and font, unless you've applied different color and font values directly to them.</p>
+      <p class="exemp">As the body has been set to have a color of blue this is inherited through the descendants.<br>We can change the color by targetting the element with a selector, such as this <span style="color: black;">span</span>.</p>
+      <div class="code">
+        <code>
+          body { <br>
+            color: blue; <br>
+          } <br>
+          span { <br>
+            color: black; <br>
+          }
+        </code>
+      </div>
+      <br>
+      <div class="code">
+        <code>
+          &lt;p&gt;As the body has been set to have a color of blue this is inherited through the descendants.&lt;/p&gt;
+          &lt;p&gt;We can change the color by targetting the element with a selector, such as this &lt;span&gt;span&lt;/span&gt;.&lt;/p&gt;
+        </code>
+      </div>
+    </article>
+  </section>
+  <section class="main-section" id="CSS_selectors">
+    <header class="header">CSS selectors</header>
+    <hr>
+    <article>
+      <p>There are a few different groupings of selectors, and knowing which type of selector you might need will help you to find the right tool for the job. In this article's subarticles we will look at the different groups of selectors in more detail.</p>
+      <h4>Type, class, and ID selectors</h4>
+      <p>This group includes selectors that target an HTML element such as an &lt;h1&gt;.</p>
+      <div class="code">
+        <code>
+          h1 { }
+        </code>
+      </div>
+      <p>It also includes selectors which target a class:</p>
+      <div class="code">
+        <code>
+          .box { }
+        </code>
+      </div>
+      <p>or, an ID:</p>
+      <div class="code">
+        <code>
+          #unique { }
+        </code>
+      </div>
+      <h4>Attribute selectors</h4>
+      <p>This group of selectors gives you different ways to select elements based on the presence of a certain attribute on an element:</p>
+      <div>
+        <code>
+          a[title] { }
+        </code>
+      </div>
+      <p>Or even make a selection based on the presence of an attribute with a particular value:</p>
+      <div class="code">
+        <code>
+          a[href="https://example.com"] { }
+        </code>
+      </div>
+      <h4>Pseudo-classes and pseudo-elements</h4>
+      <p>This group of selectors includes pseudo-classes, which style certain states of an element. The :hover pseudo-class for example selects an element only when it is being hovered over by the mouse pointer:</p>
+      <div class="code">
+        <code>
+          a:hover { }
+        </code>
+      </div>
+      <p>It also includes pseudo-elements, which select a certain part of an element rather than the element itself. For example, ::first-line always selects the first line of text inside an element (a &lt;p&gt; in the below case), acting as if a &lt;span&gt; was wrapped around the first formatted line and then selected.</p>
+      <div class="code">
+        <code>
+          p::first-line { }
+        </code>
+      </div>
+      <h4>Combinators</h4>
+      <p>The final group of selectors combine other selectors in order to target elements within our documents. The following for example selects paragraphs that are direct children of &lt;article&gt; elements using the child combinator (>):</p>
+      <div class="code">
+        <code>
+          article > p { }
+        </code>
+      </div>
+    </article>
+  </section>
+  <section class="main-section" id="Value_and_units">
+    <header class="header">Value and units</header>
+    <hr>
+    <article>
+      <p>Every property used in CSS has a value type defining the set of values that are allowed for that property.</p>
+      <p>There are various numeric value types that you might find yourself using in CSS. The following are all classed as numeric:</p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Data type</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>&lt;integer&gt;</td>
+            <td>An &lt;integer&gt; is a whole number such as 1024 or -55.</td>
+          </tr>
+          <tr>
+            <td>&lt;number&gt;</td>
+            <td>A &lt;number&gt; represents a decimal number — it may or may not have a decimal point with a fractional component. For example, 0.255, 128, or -1.2.</td>
+          </tr>
+          <tr>
+            <td>&lt;dimention&gt;</td>
+            <td>    A &lt;dimension&gt; is a &lt;number&gt; with a unit attached to it. For example, 45deg, 5s, or 10px.</td>
+          </tr>
+          <tr>
+            <td>&lt;percentage&gt; </td>
+            <td>A &lt;percentage&gt; represents a fraction of some other value. For example, 50%.</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>  
+  </section>
+  <section class="main-section" id="Introduction_to_CSS_layout">
+    <header class="header">Introduction to CSS layout</header>
+    <hr>
+    <article>
+      <p>CSS page layout techniques allow us to take elements contained in a web page and control where they are positioned relative to their default position in normal layout flow, the other elements around them, their parent container, or the main viewport/window.  The page layout techniques we'll be covering in more detail in this module are</p>
+      <ul>
+        <li>Normal flow</li>
+        <li>The display property</li>
+        <li>Flexbox</li>
+        <li>Grid</li>
+        <li>Floats</li>
+        <li>Positioning</li>
+        <li>Table layout</li>
+        <li>Multiple-column layout</li>
+      </ul>
+    </article>
+  </section>
+  <section class="main-section" id="Responsive_design">
+    <header class="header">Responsive design</header>
+    <hr>
+    <article>
+      <p>The term responsive design was coined by Ethan Marcotte in 2010 and described the use of three techniques in combination.</p>
+      <ul>
+        <li>The first was the idea of fluid grids, something which was already being explored by Gillenwater, and can be read up on in Marcotte's article, Fluid Grids.</li>
+        <li>The second technique was the idea of fluid images. Using a very simple technique of setting the max-width property to 100%, images would scale down smaller if their containing column became narrower than the image's intrinsic size, but never grow larger.</li>
+        <li>The third key component was the media query.</li>
+      </ul>
+    </article>
+  </section>
+  <section class="main-section" id="Media_Queries">
+    <header class="header">Media Queries</header>
+    <hr>
+    <article>
+     <p>Media Queries allow us to run a series of tests (e.g. whether the user's screen is greater than a certain width, or a certain resolution) and apply CSS selectively to style the page appropriately for the user's needs.</p>
+      <p>For example, the following media query tests to see if the current web page is being displayed as screen media (therefore not a printed document) and the viewport is at least 800 pixels wide. The CSS for the <span style="background-color: #e6e4f0;">.container</span> selector will only be applied if these two things are true.</p>
+      <div class="code">
+        <code>
+          @media screen and (min-width: 800px) { <br>
+            .container { <br>
+               margin: 1em 2em; <br>
+            } <br>
+          } 
+        </code>
+      </div>
+    </article>
+  </section>
+  <section class="main-section" id="Modern_layout_technologies">
+    <header class="header">Modern layout technologies</header>
+    <hr>
+    <article>
+      <p>Modern layout methods such as Multiple-column layout, Flexbox, and Grid are responsive by default. They all assume that you are trying to create a flexible grid and give you easier ways to do so.</p>
+      <h4>Multicol</h4>
+      <p>The oldest of these layout methods is multicol — when you specify a column-count, this indicates how many columns you want your content to be split into.</p>
+      <div class="code">
+        <code>
+          .container { <br>
+            column-count: 3; <br>
+          } 
+        </code>
+      </div>
+      <h4>Flexbox</h4>
+      <p>In Flexbox, flex items will shrink and distribute space between the items according to the space in their container, as their initial behavior.In the example below the flex items will each take an equal amount of space in the flex container, using the shorthand of flex: 1.</p>
+      <div class="code">
+        <code>
+          .container { <br>
+            display: flex; <br>
+          } <br>
+
+          .item { <br>
+            flex: 1; <br>
+          } 
+        </code>
+      </div>
+      <h4>Grid</h4>
+      <p>In CSS Grid Layout the fr unit allows the distribution of available space across grid tracks. The next example creates a grid container with three tracks sized at 1fr. This will create three column tracks, each taking one part of the available space in the container.</p>
+      <div class="code">
+        <code>
+          .container { <br>
+            display: grid; <br>
+            grid-template-columns: 1fr 1fr 1fr; <br>
+          } 
+        </code>
+      </div>
+    </article>
+  </section>
+  <section class="main-section" id="Reference">
+    <header class="header">Reference</header>
+    <hr>
+    <p>All the documentation in this page is taken from <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS" target="_blank">MDN</a></p>
+  </section>
+</main>
+</body>
+</html>
