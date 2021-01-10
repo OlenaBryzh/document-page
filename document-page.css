@@ -119,3 +119,25 @@ td {
   border: none;
   background-color:#e6e4f0;
 }
+@media only screen and (max-width: 600px) {
+  #navbar ul {
+    height: 200px;
+  }
+
+  #navbar {
+    position: absolute;
+    top: 0;
+    padding: 0 20px;
+    margin: 0;
+    width: 100%;
+    max-height: 265px;
+    border: none;
+    z-index: 1;
+    
+  }
+  #main-doc {
+    position: relative;
+    margin-left: 0;
+    margin-top: 320px;
+  }
+}
